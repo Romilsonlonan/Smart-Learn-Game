@@ -1,5 +1,6 @@
 # Environment variables
 .env
+.env.*
 backend/.env
 frontend/.env
 
@@ -14,6 +15,11 @@ __pycache__/
 venv/
 .venv/
 env/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
 
 # OS files
 .DS_Store
@@ -27,3 +33,15 @@ build/
 *.log
 dev.log
 
+# Blender
+*.blend1
+*.blend2
+*.crash.txt
+
+# Testing & E2E
+playwright-report/
+test-results/
+coverage/
+
+# IDE
+.idea/

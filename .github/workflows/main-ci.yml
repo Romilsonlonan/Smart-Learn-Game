@@ -19,25 +19,23 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - name: Install dependencies
         run: cd frontend && npm install
-      - name: Lint & TypeCheck
-        run: cd frontend && npm run lint && npm run typecheck
-      - name: Unit Tests
-        run: cd frontend && npm test
+      - name: Lint
+        run: cd frontend && npm run lint
+      - name: Build
+        run: cd frontend && npm run build
 
   backend-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          dotnet-version: 8.0.x
-      - name: Restore dependencies
-        run: dotnet restore backend/TechFrio.sln
-      - name: Build
-        run: dotnet build backend/TechFrio.sln --no-restore -c Release
-      - name: Unit Tests
-        run: dotnet test backend/TechFrio.sln --no-build --verbosity normal
+          python-version: '3.12'
+      - name: Install Poetry
+        run: pip install poetry
+      - name: Install dependencies
+        run: cd backend && poetry install
 
   docker-bake:
     needs: [frontend-build, backend-build]

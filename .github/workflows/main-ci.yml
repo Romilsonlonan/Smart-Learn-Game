@@ -33,9 +33,10 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install Poetry
-        run: pip install poetry
+        run: pip install poetry==2.2.1
       - name: Install dependencies
-        run: cd backend && poetry install --no-root
+        working-directory: backend
+        run: poetry install --no-interaction --no-root
 
   docker-bake:
     needs: [frontend-build, backend-build]
